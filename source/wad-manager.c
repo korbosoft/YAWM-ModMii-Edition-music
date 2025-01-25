@@ -13,7 +13,7 @@
 #include "gui.h"
 #include "menu.h"
 #include "restart.h"
-#include "sys.h"
+#include "sound.h"
 #include "video.h"
 #include "wpad.h"
 #include "wkb.h"
@@ -183,6 +183,11 @@ int main(int argc, char **argv)
 	/* Draw background */
 	Gui_DrawBackground();
 
+	Sound_Init();
+
+	/* Play sound */
+	Sound_Play();
+
 	/* Initialize Wiimote and GC Controller */
 	Wpad_Init();
 	PAD_Init();
@@ -209,6 +214,9 @@ int main(int argc, char **argv)
 	Menu_Loop();
 
 	FatUnmount();
+
+	/* Stop sound */
+	Sound_Stop();
 
 	/* Restart Wii */
 	Restart_Wait();
